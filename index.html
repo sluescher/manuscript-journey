@@ -7,7 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollama/3.2.0/scrollama.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -23,14 +23,23 @@
             font-weight: <weight>;
             font-style: normal;
         }
+        
+        .noto-sans-googlefont {
+            font-family: "Noto Sans", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 100;
+            font-style: normal;
+            font-variation-settings: "wdth" 100;
+        }
 
         body {
-            font-family: Josefin Sans, sans-serif;
+            font-family: "Noto Sans", sans-serif;
             line-height: 1.6;
             color: white;
             background: black;
         }
-          .container {
+        
+        .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem;
@@ -59,7 +68,7 @@
             font-size: 2rem;
             font-weight: bold;
             color: white;
-            font-family: Josefin Sans, sans-serif;
+            font-family: "Noto Sans", sans-serif;
         }
 
         /* Author name in header bar */
@@ -72,7 +81,7 @@
             font-size: 1.2rem;
             color: white;
             text-decoration: none;
-            font-family: Josefin Sans, sans-serif;
+            font-family: "Noto Sans", sans-serif;
             transition: color 0.3s ease;
         }
 
