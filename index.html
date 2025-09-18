@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollama Story</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollama/3.2.0/scrollama.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Fixed background container */
+        #background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .bg-image.active {
+            opacity: 1;
+        }
+
+        /* Background images */
+        .bg-image:nth-child(1) {
+            background-image: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .bg-image:nth-child(2) {
+            background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .bg-image:nth-child(3) {
+            background-image: linear-gradient(225deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        /* Scrollable content */
+        #content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .step {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .text-container {
+            max-width: 600px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 3rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .step.active .text-container {
+            opacity: 1;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Spacer for smooth scrolling */
+        .spacer {
+            height: 50vh;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed background with multiple images -->
+    <div id="background">
+        <div class="bg-image active"></div>
+        <div class="bg-image"></div>
+        <div class="bg-image"></div>
+    </div>
+
+    <!-- Scrollable content -->
+    <div id="content">
+        <div class="spacer"></div>
+        
+        <div class="step" data-step="0">
+            <div class="text-container">
+                <h1>The Journey Begins</h1>
+                <p>In the beginning, there was only the vast expanse of possibility. A world waiting to be discovered, stories waiting to be told, and dreams waiting to take flight.</p>
+                <p>As we embark on this journey together, let the colors of the sky remind us that every ending is just a new beginning in disguise.</p>
+            </div>
+        </div>
+
+        <div class="step" data-step="1">
+            <div class="text-container">
+                <h2>The Middle Path</h2>
+                <p>Halfway through our tale, the landscape shifts and transforms. What once seemed certain becomes fluid, and what appeared impossible begins to take shape.</p>
+                <p>Here, in this space between beginning and end, we find the true magic of transformation. The colors deepen, the story unfolds, and we discover that change is the only constant.</p>
+            </div>
+        </div>
+
+        <div class="step" data-step="2">
+            <div class="text-container">
+                <h2>The New Dawn</h2>
+                <p>As our journey reaches its crescendo, the world around us bursts into vibrant new colors. Pink and coral hues paint the sky, promising new adventures and endless possibilities.</p>
+                <p>This is not an ending, but a graduation. From here, you carry forward the wisdom of the journey, ready to write your own story against whatever backdrop life provides.</p>
+            </div>
+        </div>
+
+        <div class="spacer"></div>
+    </div>
+
+    <script>
+        // Initialize Scrollama
+        const scroller = scrollama();
+
+        // Get all background images
+        const bgImages = document.querySelectorAll('.bg-image');
+        const steps = document.querySelectorAll('.step');
+
+        // Setup the instance, pass callback functions
+        scroller
+            .setup({
+                step: '.step',
+                offset: 0.5,
+                debug: false
+            })
+            .onStepEnter(response => {
+                // Remove active class from all background images and steps
+                bgImages.forEach(img => img.classList.remove('active'));
+                steps.forEach(step => step.classList.remove('active'));
+                
+                // Add active class to current background image and step
+                const stepIndex = response.index;
+                if (bgImages[stepIndex]) {
+                    bgImages[stepIndex].classList.add('active');
+                }
+                steps[stepIndex].classList.add('active');
+            })
+            .onStepExit(response => {
+                // Optional: Remove active class when stepping out
+                steps[response.index].classList.remove('active');
+            });
+
+        // Resize function to update Scrollama when window size changes
+        function handleResize() {
+            scroller.resize();
+        }
+
+        // Setup resize event listener
+        window.addEventListener('resize', handleResize);
+
+        // Initialize first step as active
+        if (steps[0]) {
+            steps[0].classList.add('active');
+        }
+    </script>
+</body>
+</html>
