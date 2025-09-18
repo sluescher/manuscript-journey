@@ -264,7 +264,7 @@
         <div class="spacer"></div>
     </div>
 
-   <script>
+  <script>
         // Initialize Scrollama
         const scroller = scrollama();
 
@@ -272,64 +272,33 @@
         const bgImages = document.querySelectorAll('.bg-image');
         const steps = document.querySelectorAll('.step');
 
-        // Setup the instance with 0.5 offset (triggers when element reaches middle of screen)
+        // Setup the instance with small offset (triggers when element appears at top of screen)
         scroller
             .setup({
                 step: '.step',
-                offset: 0.5, // Changed from 0.1 to 0.5 to trigger at middle of screen
+                offset: 0.1, // Small offset to trigger as soon as text box appears
                 debug: false,
-                progress: true // Enable progress tracking for smoother transitions
+                progress: false // Disable progress tracking for immediate transitions
             })
             .onStepEnter(response => {
-                console.log('Step entered:', response.index, 'Progress:', response.progress); // Debug log
+                console.log('Step entered:', response.index); // Debug log
                 
-                // Remove active class from all steps
+                // Remove active class from all background images and steps
+                bgImages.forEach(img => img.classList.remove('active'));
                 steps.forEach(step => step.classList.remove('active'));
                 
-                // Add active class to current step
+                // Add active class to current background image and step immediately
                 const stepIndex = response.index;
-                steps[stepIndex].classList.add('active');
-                
-                // Handle background image transitions
-                // Only change background when the step is at least 50% visible (middle of screen)
-                if (response.progress >= 0.5 || response.direction === 'down') {
-                    // Remove active class from all background images
-                    bgImages.forEach(img => img.classList.remove('active'));
-                    
-                    // Add active class to current background image
-                    if (bgImages[stepIndex]) {
-                        bgImages[stepIndex].classList.add('active');
-                        console.log('Background changed to image:', stepIndex + 1); // Debug log
-                    }
+                if (bgImages[stepIndex]) {
+                    bgImages[stepIndex].classList.add('active');
+                    console.log('Background changed to image:', stepIndex + 1); // Debug log
                 }
+                steps[stepIndex].classList.add('active');
             })
             .onStepExit(response => {
-                console.log('Step exited:', response.index, 'Direction:', response.direction); // Debug log
-                
-                // When scrolling up and exiting a step, revert to previous background
-                if (response.direction === 'up') {
-                    const prevIndex = Math.max(0, response.index - 1);
-                    
-                    // Remove active class from all background images
-                    bgImages.forEach(img => img.classList.remove('active'));
-                    
-                    // Activate previous background image
-                    if (bgImages[prevIndex]) {
-                        bgImages[prevIndex].classList.add('active');
-                        console.log('Background reverted to image:', prevIndex + 1); // Debug log
-                    }
-                }
-                
-                // Remove active class from exited step
+                console.log('Step exited:', response.index); // Debug log
+                // Optional: Remove active class when stepping out
                 steps[response.index].classList.remove('active');
-            })
-            .onStepProgress(response => {
-                // Optional: Add smooth progress-based effects here
-                // This fires continuously as the user scrolls through each step
-                console.log('Step progress:', response.index, response.progress);
-                
-                // You can add additional progress-based animations here if needed
-                // For example, gradually fade backgrounds based on scroll progress
             });
 
         // Resize function to update Scrollama when window size changes
