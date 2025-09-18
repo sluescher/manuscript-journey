@@ -47,7 +47,7 @@
         }
 
         /* Background images */
-         .bg-image:nth-child(1) {
+        .bg-image:nth-child(1) {
             background-image: url('images/cairo-map.jpeg');
         }
 
@@ -71,6 +71,7 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            margin-bottom: 100vh;
         }
 
         .text-container {
@@ -110,7 +111,7 @@
 
         /* Spacer for smooth scrolling */
         .spacer {
-            height: 50vh;
+            height: 100vh;
         }
     </style>
 </head>
@@ -169,6 +170,8 @@
                 debug: false
             })
             .onStepEnter(response => {
+                console.log('Step entered:', response.index); // Debug log
+                
                 // Remove active class from all background images and steps
                 bgImages.forEach(img => img.classList.remove('active'));
                 steps.forEach(step => step.classList.remove('active'));
@@ -177,10 +180,12 @@
                 const stepIndex = response.index;
                 if (bgImages[stepIndex]) {
                     bgImages[stepIndex].classList.add('active');
+                    console.log('Background changed to image:', stepIndex + 1); // Debug log
                 }
                 steps[stepIndex].classList.add('active');
             })
             .onStepExit(response => {
+                console.log('Step exited:', response.index); // Debug log
                 // Optional: Remove active class when stepping out
                 steps[response.index].classList.remove('active');
             });
