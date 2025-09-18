@@ -1,186 +1,43 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+#scroll {
+  position: relative;
+}
+.scroll__graphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: auto;
+  width: 100%;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
-body {
-    font-family: 'Georgia', serif;
-    background: #f8f6f0;
+.scroll__graphic.is-fixed {
+  position: fixed;
 }
 
-#vis {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(135deg, #8B4513, #D2691E);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.scroll__graphic.is-bottom {
+  bottom: 0;
+  top: auto;
 }
-
-#map-container {
-    position: relative;
-    width: 80%;
-    height: 80%;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    overflow: hidden;
+.scroll__graphic .chart {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
-
-#map-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.7;
-    transition: all 0.8s ease;
-}
-
-#manuscript-display {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 200px;
-    height: 300px;
-    background: white;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    transition: all 0.8s ease;
-}
-
-#manuscript-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-}
-
-#story {
-    position: relative;
-    margin-left: 0;
-    background: transparent;
-    padding-top: 100vh;
+.scroll__text {
+  padding: 0 1rem;
+  max-width: 30rem;
 }
 
 .step {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0 50px;
+  opacity: 0;
+  padding: 1rem;
 }
 
-.step-content {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 40px;
-    border-radius: 15px;
-    max-width: 500px;
-    margin-right: 50px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    opacity: 0.7;
-    transition: all 0.5s ease;
+.step.is-active {
+  opacity: 1;
 }
-
-.step.is-active .step-content {
-    opacity: 1;
-    transform: translateX(-20px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
-}
-
-h2 {
-    color: #8B4513;
-    margin-bottom: 20px;
-    font-size: 1.8em;
-    border-bottom: 2px solid #D2691E;
-    padding-bottom: 10px;
-}
-
-p {
-    line-height: 1.6;
-    margin-bottom: 15px;
-    color: #333;
-}
-
-.source-note {
-    margin-top: 20px;
-    padding: 10px;
-    background: #f0f0f0;
-    border-left: 4px solid #D2691E;
-    font-size: 0.9em;
-}
-
-.interactive-manuscript {
-    position: relative;
-    background: #faf8f5;
-    padding: 20px;
-    border: 2px solid #D2691E;
-    margin: 20px 0;
-    min-height: 100px;
-}
-
-.marginal-note {
-    position: absolute;
-    cursor: pointer;
-    font-size: 1.2em;
-    transition: transform 0.3s ease;
-}
-
-.marginal-note:hover {
-    transform: scale(1.3);
-}
-
-.marginal-note:nth-child(1) { top: 20px; right: 10px; }
-.marginal-note:nth-child(2) { bottom: 20px; left: 10px; }
-
-.arabic-quote {
-    background: #f9f7f4;
-    padding: 20px;
-    border-radius: 8px;
-    margin: 20px 0;
-    border-right: 4px solid #D2691E;
-}
-
-.arabic-text {
-    font-family: 'Amiri', 'Traditional Arabic', serif;
-    font-size: 1.3em;
-    direction: rtl;
-    text-align: right;
-    margin-bottom: 10px;
-    color: #8B4513;
-}
-
-.translation {
-    font-style: italic;
-    color: #666;
-    border-top: 1px solid #e0e0e0;
-    padding-top: 10px;
-}
-
-#network-diagram {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
-    padding: 20px;
-    background: #f5f5f5;
-    border-radius: 8px;
-}
-
-.scholar-node {
-    text-align: center;
-    font-size: 2em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 10px;
-}
-
-.scholar-node:hover {
-    transform: scale(1.2);
-}
-
-.network-caption {
-    font-size: 0.9em;
-    font-style: italic;
-    color: #6
