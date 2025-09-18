@@ -125,17 +125,7 @@
             font-family: 'Georgia', serif;
             pointer-events: none;
         }
-        .author-name{
-            position: fixed;
-            top: 0px;
-            left: 10px;
-            z-index: 1000;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: black;
-            font-family: 'Georgia', serif;
-            pointer-events: none;
-        }
+
         /* Fixed white header bar */
         .header-bar {
             position: fixed;
@@ -143,7 +133,7 @@
             left: 100;
             width: 100%;
             height: 50px;
-            background: white;
+            background: rgba(255, 255, 255, 0.5);
             z-index: 1001;
             display: flex;
             justify-content: space-between
@@ -155,7 +145,6 @@
 <body>
     <div class="header-bar">
         <div class="main-title">Research Proposal</div>
-        <div class="author-name">Jack White</div>
     </div>
     <!-- Fixed background with multiple images -->
     <div id="background">
