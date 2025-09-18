@@ -264,7 +264,7 @@
         <div class="spacer"></div>
     </div>
 
-  <script>
+    <script>
         // Initialize Scrollama
         const scroller = scrollama();
 
@@ -272,11 +272,11 @@
         const bgImages = document.querySelectorAll('.bg-image');
         const steps = document.querySelectorAll('.step');
 
-        // Setup the instance with small offset (triggers when element appears at top of screen)
+        // Setup the instance with 0.9 offset (triggers when element appears at bottom of screen)
         scroller
             .setup({
                 step: '.step',
-                offset: 0.1, // Small offset to trigger as soon as text box appears
+                offset: 0.9, // Trigger when element is 90% down the screen (just appearing at bottom)
                 debug: false,
                 progress: false // Disable progress tracking for immediate transitions
             })
